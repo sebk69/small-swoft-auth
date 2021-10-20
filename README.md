@@ -1,4 +1,4 @@
-# sebk/swoft-voter
+# sebk/small-swoft-auth
 
 Jwt auth for Swoft based on small-orm
 
