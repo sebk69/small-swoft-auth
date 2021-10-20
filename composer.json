@@ -1,0 +1,24 @@
+{
+  "name": "sebk/small-swoft-auth",
+  "type": "library",
+  "description": "Swoft jwt auth based on small-orm",
+  "license": "GPL-3.0-only",
+  "authors": [
+    {
+      "name": "Sébasttien Kus",
+      "email": "seb@small-iceberg.dev"
+    }
+  ],
+  "require": {
+    "swoft/framework": "~2.0.0",
+    "swoft/auth": "~2.0.0",
+    "sebk/small-orm-swoft": "1.*",
+    "sebk/small-orm-forms": "1.*",
+    "sebk/swoft-voter": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sebk\\SmallSwoftAuth\\": "src/"
+    }
+  }
+}
