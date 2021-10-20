@@ -8,9 +8,9 @@
 
 namespace Sebk\SmallSwoftAuth\Controller;
 
-use App\Security\AccessDeniedException;
-use App\Security\AuthFailedException;
-use App\Security\AuthManagerService;
+use Sebk\SmallSwoftAuth\Security\AccessDeniedException;
+use Sebk\SmallSwoftAuth\Security\AuthFailedException;
+use Sebk\SmallSwoftAuth\Service\AuthManagerService;
 use Sebk\SwoftVoter\VoterManager\VoterInterface;
 use Sebk\SwoftVoter\VoterManager\VoterManagerInterface;
 
@@ -28,7 +28,12 @@ abstract class TokenSecuredController
 
     public function __construct()
     {
-        $this->authManager = bean(AuthManagerService::class);
+        try {
+            $this->authManager = bean(AuthManagerService::class);
+        } catch (\Exception $e) {
+            throw new AuthFailedException("Auth failed");
+        }
+
         $this->voterManager = bean(VoterManagerInterface::class);
     }
 
@@ -39,7 +44,11 @@ abstract class TokenSecuredController
      */
     private function getData()
     {
-        return $this->authManager->getSession()->getExtendedData();
+        try {
+            return $this->authManager->getSession()->getExtendedData();
+        } catch (\Exception $e) {
+            throw new AuthFailedException("Auth failed");
+        }
     }
 
     /**
@@ -49,7 +58,11 @@ abstract class TokenSecuredController
      */
     protected function isLoggedIn()
     {
-        return $this->authManager->getSession() != null && $this->authManager->getSession()->getIdentity() != null;
+        try {
+            return $this->authManager->getSession() != null && $this->authManager->getSession()->getIdentity() != null;
+        } catch (\Exception $e) {
+            throw new AuthFailedException("Auth failed");
+        }
     }
 
     /**
@@ -58,7 +71,11 @@ abstract class TokenSecuredController
      */
     protected function authFirewall()
     {
-        if (!$this->isLoggedIn()) {
+        try {
+            if (!$this->isLoggedIn()) {
+                throw new AuthFailedException("Auth failed");
+            }
+        } catch (\Exception $e) {
             throw new AuthFailedException("Auth failed");
         }
     }
@@ -73,7 +90,7 @@ abstract class TokenSecuredController
     {
         $this->authFirewall();
 
-        return bean('sebk_small_orm_dao')->get(...config('app.userDao'))->makeModelFromStdClass($this->getData()["user"]);
+        return bean('sebk_small_orm_dao')->get(...config('app.user.dao'))->makeModelFromStdClass($this->getData()["user"]);
     }
 
     /**
@@ -86,6 +103,8 @@ abstract class TokenSecuredController
      */
     protected function denyAccessUnlessGranted($attributes, $subject)
     {
+        $this->authFirewall();
+
         // If single value for attribute, we transform it to array
         if (!is_array($attributes)) {
             $attributes = [$attributes];

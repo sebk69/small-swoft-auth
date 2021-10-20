@@ -9,6 +9,7 @@
 namespace Sebk\SmallSwoftAuth\Service;
 
 use Sebk\SmallOrmSwoft\Trait\Injection\DaoFactory;
+use Sebk\SmallSwoftAuth\Interface\UserModelInterface;
 use Sebk\SmallSwoftAuth\Service\Form\LoginForm;
 use Sebk\SmallOrmCore\Factory\DaoNotFoundException;
 use Sebk\SmallOrmSwoft\Factory\Dao;
@@ -65,6 +66,10 @@ class AuthLogic implements AccountTypeInterface
                 ->daoFactory
                 ->get(...$this->userConfig['dao'])
                 ->findOneBy([$this->userConfig['accountField'] => $form->getValue(LoginForm::ACCOUNT_KEY)]);
+
+            if (!$user instanceof UserModelInterface) {
+                throw new \Exception("User (" . $this->userConfig['dao'][1] . ") model must implement UserModelInterface");
+            }
 
             // Check password
             if (!$user->checkPassword($form->getValue(LoginForm::PASSWORD_KEY))) {

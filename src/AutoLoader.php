@@ -6,18 +6,12 @@
  * Under GNU GPL V3 licence
  */
 
-namespace Sebk\SwoftVoter;
+namespace Sebk\SmallSwoftAuth;
 
 
 use Sebk\SmallOrmCore\Database\SwoftPool;
-use Sebk\SmallOrmSwoft\Compatibility\SymfonyKernel;
-use Sebk\SmallOrmSWoft\Factory\Dao;
-use Sebk\SmallOrmSwoft\Factory\Validator;
-use Sebk\SmallOrmSWoft\Generator\DaoGenerator;
-use Sebk\SmallOrmSwoft\Factory\Connections;
-use Sebk\SmallOrmSwoft\Layers\Layers;
-use Sebk\SwoftVoter\VoterManager\VoterManager;
-use Sebk\SwoftVoter\VoterManager\VoterManagerInterface;
+use Sebk\SmallSwoftAuth\Service\AuthManagerService;
+use Swoft\Auth\Contract\AuthManagerInterface;
 use Swoft\Bean\Container;
 use Swoft\Helper\ComposerJSON;
 use function bean;
@@ -31,21 +25,6 @@ use Swoft\SwoftComponent;
  */
 class AutoLoader extends SwoftComponent
 {
-    /**
-     * @return array
-     */
-    public function beans(): array
-    {
-        return [
-            VoterManagerInterface::class => [
-                'class' => VoterManager::class,
-                [
-                    'configPath' => ['/app/src/Security/Voter'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * @return array
      */

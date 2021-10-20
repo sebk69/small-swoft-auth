@@ -12,6 +12,7 @@ use Swoft\Auth\AuthManager;
 use Swoft\Auth\AuthSession;
 use Swoft\Auth\Contract\AuthManagerInterface;
 use Swoft\Bean\Annotation\Mapping\Bean;
+use Swoft\Cache\CacheManager;
 
 /**
  * @Bean ()
