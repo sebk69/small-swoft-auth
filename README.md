@@ -11,7 +11,7 @@ Create your Swoft project : http://swoft.io/docs/2.x/en/quick-start/install.html
 Install dependencies
 ```
 composer require sebk/small-orm-core
-composer require sebk/sebk/small-orm-forms
+composer require sebk/small-orm-forms
 composer require sebk/swoft-voter
 ```
 
