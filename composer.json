@@ -13,7 +13,7 @@
     "swoft/framework": "~2.0.0",
     "swoft/auth": "~2.0.0",
     "sebk/small-orm-swoft": "1.*",
-    "sebk/small-orm-forms": "1.*",
+    "sebk/small-orm-forms": "dev-master",
     "sebk/swoft-voter": "1.*"
   },
   "autoload": {
