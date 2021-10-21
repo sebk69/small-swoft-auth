@@ -16,9 +16,9 @@ class LoginForm extends AbstractForm
     const ACCOUNT_KEY = 'account';
     const PASSWORD_KEY = 'password';
 
-    public function __construct(array $values)
+    public function __construct(array $keys, array $values)
     {
-        $this->addField(self::ACCOUNT_KEY, null, $values[self::ACCOUNT_KEY] ?? null, null, Field::MANDATORY);
-        $this->addField(self::PASSWORD_KEY, null, $values[self::PASSWORD_KEY] ?? null, null, Field::MANDATORY);
+        $this->addField($keys[self::ACCOUNT_KEY], null, $values[$keys[self::ACCOUNT_KEY]] ?? null, null, Field::MANDATORY);
+        $this->addField($keys[self::PASSWORD_KEY], null, $values[$keys[self::PASSWORD_KEY]] ?? null, null, Field::MANDATORY);
     }
 }

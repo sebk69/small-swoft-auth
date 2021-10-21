@@ -35,11 +35,16 @@ class AuthLogic implements AccountTypeInterface
      * @var array
      */
     protected $userConfig;
+    
+    protected $loginForm;
 
     public function __construct()
     {
         // Get user config
         $this->userConfig = config('app.user');
+        
+        // Gets login fields
+        $this->loginForm = config('app.loginForm');
     }
 
     /**
@@ -55,7 +60,7 @@ class AuthLogic implements AccountTypeInterface
 
         try {
             // Check input
-            $form = new LoginForm($data);
+            $form = new LoginForm($this->loginForm, $data);
             $messages = $form->validate();
             if (count($messages) > 0) {
                 return $failed;
@@ -65,14 +70,14 @@ class AuthLogic implements AccountTypeInterface
             $user = $this
                 ->daoFactory
                 ->get(...$this->userConfig['dao'])
-                ->findOneBy([$this->userConfig['accountField'] => $form->getValue(LoginForm::ACCOUNT_KEY)]);
+                ->findOneBy([$this->userConfig['accountField'] => $form->getValue($this->loginForm[LoginForm::ACCOUNT_KEY])]);
 
             if (!$user instanceof UserModelInterface) {
                 throw new \Exception("User (" . $this->userConfig['dao'][1] . ") model must implement UserModelInterface");
             }
 
             // Check password
-            if (!$user->checkPassword($form->getValue(LoginForm::PASSWORD_KEY))) {
+            if (!$user->checkPassword($form->getValue($this->loginForm[LoginForm::PASSWORD_KEY]))) {
                 return $failed;
             }
 
