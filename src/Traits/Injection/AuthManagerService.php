@@ -6,7 +6,7 @@
  * Under GNU GPL V3 licence
  */
 
-namespace Sebk\SmallSwoftAuth\Trait\Injection;
+namespace Sebk\SmallSwoftAuth\Traits\Injection;
 
 use Swoft\Bean\Annotation\Mapping\Inject;
 

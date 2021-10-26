@@ -6,7 +6,7 @@
  * Under GNU GPL V3 licence
  */
 
-namespace Sebk\SmallSwoftAuth\Interface;
+namespace Sebk\SmallSwoftAuth\Interfaces;
 
 interface UserModelInterface
 {

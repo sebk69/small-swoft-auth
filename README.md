@@ -52,7 +52,7 @@ return [
 
 You're application user model must implement UserModelInterface. (In this example, password stored via md5 hash for simplicity. Don't use md5 hash, prefere SHA-256 hash or more for security reasons)  :
 ```
-use Sebk\SmallSwoftAuth\Interface\UserModelInterface;
+use Sebk\SmallSwoftAuth\Interfaces\UserModelInterface;
 
 class User extends Model implements UserModelInterface
 {
@@ -95,7 +95,7 @@ Here is a controller example :
 
 namespace App\Http\Controller;
 
-use Sebk\SmallOrmSwoft\Trait\Injection\DaoFactory;
+use Sebk\SmallOrmSwoft\Traits\Injection\DaoFactory;
 use Sebk\SmallSwoftAuth\Controller\TokenSecuredController;
 use Sebk\SwoftVoter\VoterManager\VoterInterface;
 
@@ -159,7 +159,7 @@ Here is a AuthController implementing a login action :
 
 namespace App\Http\Controller;
 
-use Sebk\SmallSwoftAuth\Trait\Injection\AuthManagerService;
+use Sebk\SmallSwoftAuth\Traits\Injection\AuthManagerService;
 
 use Swoft\Auth\Exception\AuthException;
 use Swoft\Http\Message\ContentType;

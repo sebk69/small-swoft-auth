@@ -8,8 +8,8 @@
 
 namespace Sebk\SmallSwoftAuth\Service;
 
-use Sebk\SmallOrmSwoft\Trait\Injection\DaoFactory;
-use Sebk\SmallSwoftAuth\Interface\UserModelInterface;
+use Sebk\SmallOrmSwoft\Traits\Injection\DaoFactory;
+use Sebk\SmallSwoftAuth\Interfaces\UserModelInterface;
 use Sebk\SmallSwoftAuth\Service\Form\LoginForm;
 use Sebk\SmallOrmCore\Factory\DaoNotFoundException;
 use Sebk\SmallOrmSwoft\Factory\Dao;
